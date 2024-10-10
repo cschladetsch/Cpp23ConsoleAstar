@@ -4,7 +4,7 @@ This project implements an Iterative Deepening A* (IDA*) algorithm for pathfindi
 
 ## Sample
 
-![anim](/resources/Animation.mp4)
+![anim](/resources/Animation.gif)
 
 ## Features
 

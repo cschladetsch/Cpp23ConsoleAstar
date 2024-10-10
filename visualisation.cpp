@@ -1,13 +1,15 @@
 #include "visualisation.hpp"
-#include "./rang.hpp"
+#include "rang.hpp"
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unordered_set>
 
 const int GRID_SIZE = 10;
 
 void visualise_grid(const std::vector<std::vector<int>>& grid, const std::vector<Point>& path, 
-                    const Point& current, const Point& start, const Point& goal) {
+                    const Point& current, const Point& start, const Point& goal,
+                    const std::unordered_set<Point>& visited) {
     std::vector<std::vector<char>> visual(GRID_SIZE, std::vector<char>(GRID_SIZE, '.'));
 
     // Mark obstacles
@@ -15,6 +17,11 @@ void visualise_grid(const std::vector<std::vector<int>>& grid, const std::vector
         for (int x = 0; x < GRID_SIZE; ++x) {
             if (grid[y][x] == 1) visual[y][x] = '#';
         }
+    }
+
+    // Mark visited nodes
+    for (const auto& p : visited) {
+        if (visual[p.y][p.x] == '.') visual[p.y][p.x] = 'v';
     }
 
     // Mark path
@@ -45,6 +52,9 @@ void visualise_grid(const std::vector<std::vector<int>>& grid, const std::vector
                 case '*':
                     std::cout << rang::fg::green << cell << ' ' << rang::fg::reset;
                     break;
+                case 'v':
+                    std::cout << rang::fg::cyan << cell << ' ' << rang::fg::reset;
+                    break;
                 case 'S':
                     std::cout << rang::fg::blue << cell << ' ' << rang::fg::reset;
                     break;
@@ -65,5 +75,5 @@ void visualise_grid(const std::vector<std::vector<int>>& grid, const std::vector
     // Print some stats
     std::cout << "Path length: " << path.size() << std::endl;
     std::cout << "Current position: (" << current.x << ", " << current.y << ")" << std::endl;
+    std::cout << "Visited nodes: " << visited.size() << std::endl;
 }
-

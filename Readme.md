@@ -2,6 +2,10 @@
 
 This project implements an Iterative Deepening A* (IDA*) algorithm for pathfinding on a 2D grid, including diagonal movements. It features a non-scrolling ASCII visualisation of the search process, demonstrating the algorithm's behavior in both time and space.
 
+## Sample
+
+![anim](resources/Flamingo.mp4)
+
 ## Features
 
 - IDA* algorithm implementation

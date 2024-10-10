@@ -1,11 +1,15 @@
-# IDA* Pathfinding Visualiser
+# Iterative Deepening A* (IDA*) Pathfinding Visualiser
 
-This project implements the Iterative Deepening A* (IDA*) algorithm for pathfinding on a 2D grid. It includes ASCII visualisation of the search process, demonstrating the algorithm's efficiency in both time and space complexity.
+This project implements an Iterative Deepening A* (IDA*) algorithm for pathfinding on a 2D grid, including diagonal movements. It features a non-scrolling ASCII visualisation of the search process, demonstrating the algorithm's behavior in both time and space.
 
 ## Features
 
-- Efficient IDA* algorithm implementation
-- ASCII-based grid visualisation
+- IDA* algorithm implementation
+  - Finds a path from start to goal if one exists
+  - Supports both cardinal and diagonal movements
+  - Uses Euclidean distance heuristic
+  - Employs iterative deepening for memory efficiency
+- Non-scrolling ASCII-based grid visualisation
 - Customisable grid size and obstacles
 - Easy-to-use build and run script
 
@@ -60,6 +64,30 @@ If you prefer to build the project manually or can't use the `r` script, follow 
    ./ida_star
    ```
 
+## Algorithm Details
+
+The IDA* algorithm implemented in this project works as follows:
+
+1. It starts with an initial bound based on the Euclidean distance heuristic from the start to the goal.
+2. It performs a depth-first search, considering both cardinal and diagonal movements.
+3. It prunes branches when f(n) = g(n) + h(n) exceeds the current bound.
+4. Diagonal movements are assigned a cost of √2, while cardinal movements have a cost of 1.
+5. If the goal is not found within the current bound, the bound is increased to the minimum f(n) value that exceeded the previous bound.
+6. The search is repeated with the new bound until a path is found or the problem is proven unsolvable.
+
+While this implementation aims to find an efficient path, it may not always guarantee the shortest path in all scenarios. The effectiveness of the algorithm can vary depending on the specific grid configuration and heuristic accuracy.
+
+## Visualisation
+
+The program features a non-scrolling ASCII visualisation of the pathfinding process. The grid is updated in place, providing a real-time view of the algorithm's progress.
+
+- '.' represents open cells
+- '#' represents obstacles
+- 'S' marks the start point
+- 'G' marks the goal point
+- 'C' shows the current position being explored
+- '*' indicates the path found
+
 ## Customisation
 
 You can modify the grid size, obstacles, start point, and goal point in the `main.cpp` file. After making changes, rebuild the project using the `./r` script or by following the manual build steps.
@@ -81,6 +109,14 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project is open source and available under the [MIT License](LICENSE).
 
+## Limitations and Future Improvements
+
+- The current implementation may not always find the optimal path in all scenarios.
+- Performance can be improved for larger grids or more complex obstacle patterns.
+- The visualisation is basic and could be enhanced for better clarity.
+
+Future work could focus on optimizing the algorithm, improving the heuristic function, and enhancing the visualisation capabilities.
+
 ## Contact
 
-If you have any questions or feedback, please open an issue on the GitHub repository.
+If you have any questions, feedback, or suggestions for improvement, please open an issue on the GitHub repository.

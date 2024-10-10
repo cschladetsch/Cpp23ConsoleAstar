@@ -18,6 +18,9 @@ int main() {
     Point start(0, 0);
     Point goal(9, 9);
 
+    // Clear the screen and hide the cursor
+    std::cout << "\033[2J\033[?25l";
+
     std::cout << "Finding path from (" << start.x << "," << start.y << ") to ("
          << goal.x << "," << goal.y << ")..." << std::endl;
 
@@ -25,6 +28,8 @@ int main() {
 
     if (path.empty()) {
         std::cout << "No path found!" << std::endl;
+        // Show the cursor before exiting
+        std::cout << "\033[?25h";
         return 0;
     }
 
@@ -34,10 +39,10 @@ int main() {
     for (size_t i = 0; i < path.size(); ++i) {
         visualise_grid(grid, path, path[i], start, goal);
         std::this_thread::sleep_for(std::chrono::milliseconds(500)); // Delay for visualisation
-        std::cout << "\033[" << GRID_SIZE + 3 << "A"; // Move cursor up
     }
 
-    std::cout << "Path length: " << path.size() - 1 << std::endl;
+    // Show the cursor before exiting
+    std::cout << "\033[?25h";
 
     return 0;
 }

@@ -1,6 +1,8 @@
 #include "visualisation.hpp"
+#include "./rang.hpp"
 #include <iostream>
 #include <string>
+#include <vector>
 
 const int GRID_SIZE = 10;
 
@@ -25,14 +27,43 @@ void visualise_grid(const std::vector<std::vector<int>>& grid, const std::vector
     visual[current.y][current.x] = 'C';
     visual[goal.y][goal.x] = 'G';
 
+    // Move cursor to the top-left corner of the screen
+    std::cout << "\033[H";
+
     // Print the grid
     std::cout << std::string(GRID_SIZE * 2 + 1, '-') << std::endl;
     for (const auto& row : visual) {
         std::cout << "|";
         for (char cell : row) {
-            std::cout << cell << " ";
+            switch(cell) {
+                case '.':
+                    std::cout << rang::fg::gray << cell << ' ' << rang::fg::reset;
+                    break;
+                case '#':
+                    std::cout << rang::fg::red << cell << ' ' << rang::fg::reset;
+                    break;
+                case '*':
+                    std::cout << rang::fg::green << cell << ' ' << rang::fg::reset;
+                    break;
+                case 'S':
+                    std::cout << rang::fg::blue << cell << ' ' << rang::fg::reset;
+                    break;
+                case 'C':
+                    std::cout << rang::fg::yellow << cell << ' ' << rang::fg::reset;
+                    break;
+                case 'G':
+                    std::cout << rang::fg::magenta << cell << ' ' << rang::fg::reset;
+                    break;
+                default:
+                    std::cout << cell << ' ';
+            }
         }
         std::cout << "|" << std::endl;
     }
     std::cout << std::string(GRID_SIZE * 2 + 1, '-') << std::endl;
+
+    // Print some stats
+    std::cout << "Path length: " << path.size() << std::endl;
+    std::cout << "Current position: (" << current.x << ", " << current.y << ")" << std::endl;
 }
+

@@ -5,7 +5,7 @@ This project implements an Iterative Deepening A* (IDA*) algorithm for pathfindi
 ## Sample
 
 https://user-images.githubusercontent.com/cschladetsch/IdAstarCpp23/raw/main/path/to/your/video.mp4
-https://user-images.githubusercontent.com/cschladetsch/IdAstarCpp23/raw/maaster/resources/Flamingo.mp4
+https://user-images.githubusercontent.com/cschladetsch/IdAstarCpp23/raw/master/resources/Flamingo.mp4
 
 ![anim](resources/Flamingo.mp4)
 
